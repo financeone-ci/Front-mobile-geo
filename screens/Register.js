@@ -1,13 +1,13 @@
 import React from "react";
 import { Button, Surface, Snackbar, TextInput, Text } from "react-native-paper";
-//import {  useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 import { Avatar } from "react-native-rapi-ui";
 import Style from "../Style";
 import Formulaire from "../components/Formulaire";
 import { ScrollView } from "react-native";
 
 export default function Login(props) {
-  // const navigation = useNavigation()
+  const navigation = useNavigation();
   const style = Style;
 
   return (
@@ -57,23 +57,22 @@ export default function Login(props) {
               },*/
           ]}
         />
-        {/*          
-          <Button 
-          icon="login" 
-          mode="contained"  
-          style={style.button} 
-          onPress={() => navigation.replace('Events')}>
-           Valider
-          </Button>
-     
-      
-      
-          <Button  
-          style={style.button} 
-          onPress={() => navigation.navigate('Login')}>
-           Connexion
-          </Button>
-      */}
+
+        <Button
+          icon="login"
+          mode="contained"
+          style={style.button}
+          onPress={() => navigation.replace("Events")}
+        >
+          Valider
+        </Button>
+
+        <Button
+          style={style.button}
+          onPress={() => navigation.navigate("Login")}
+        >
+          Connexion
+        </Button>
       </Surface>
     </ScrollView>
   );

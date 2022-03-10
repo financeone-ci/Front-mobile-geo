@@ -1,13 +1,13 @@
 import React from "react";
 import { Button, Surface, Snackbar, TextInput, Text } from "react-native-paper";
-//import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { Avatar } from "react-native-rapi-ui";
 import Style from "../Style";
 import Formulaire from "../components/Formulaire";
 import AppBarBottom from "../components/AppBarBottom";
 
 export default function Login(props) {
-  //const navigation = useNavigation();
+  const navigation = useNavigation();
   const style = Style;
 
   return (
@@ -36,7 +36,7 @@ export default function Login(props) {
         ]}
       />
 
-      {/* <Button
+      <Button
         icon="account-key"
         mode="contained"
         style={style.button}
@@ -52,7 +52,7 @@ export default function Login(props) {
         onPress={() => navigation.navigate("Register")}
       >
         Nouveau compte
-      </Button> */}
+      </Button>
     </Surface>
   );
 }
