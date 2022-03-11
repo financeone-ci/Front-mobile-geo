@@ -1,5 +1,7 @@
 import React from "react";
-import { Button, Surface, Snackbar, TextInput, Text } from "react-native-paper";
+import { View } from "react-native";
+import { Surface, Snackbar, TextInput, Text } from "react-native-paper";
+import { Input, Icon, Button } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { Avatar } from "react-native-rapi-ui";
 import Style from "../Style";
@@ -11,7 +13,7 @@ export default function Login(props) {
   const style = Style;
 
   return (
-    <Surface style={style.container}>
+    <Surface style={style.containerLogin}>
       <Avatar
         source={{
           uri: "http://assets.stickpng.com/thumbs/5a10a7f29642de34b6b65d03.png",
@@ -20,39 +22,43 @@ export default function Login(props) {
       />
 
       <Text style={style.text}>Connexion</Text>
-      <Formulaire
-        elts={[
-          {
-            style: style.textinput,
-            placeholder: "Utilisateur",
-            right: <TextInput.Icon name="account" />,
-          },
-          {
-            style: style.textinput,
-            placeholder: "Mot de passe",
-            secureTextEntry: true,
-            right: <TextInput.Icon name="lock" />,
-          },
-        ]}
+      <Input
+        placeholder="Utilisateur"
+        leftIcon={{ type: "font-awesome", name: "chevron-left" }}
       />
-
-      <Button
-        icon="account-key"
-        mode="contained"
-        style={style.button}
-        onPress={() => navigation.replace("Accueil")}
+      <Input
+        placeholder="Mot de passe"
+        leftIcon={{ type: "font-awesome", name: "chevron-left" }}
+      />
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-around",
+        }}
       >
-        Connexion
-      </Button>
-
-      <Button
-        style={style.buttonText}
-        color="#fff"
-        icon="account-plus"
-        onPress={() => navigation.navigate("Register")}
-      >
-        Nouveau compte
-      </Button>
+        <Button
+          title={"Connexion"}
+          containerStyle={{
+            width: 150,
+            marginHorizontal: 50,
+            marginVertical: 10,
+          }}
+          buttonStyle={{
+            backgroundColor: "#e75e56",
+            borderRadius: 3,
+          }}
+        />
+        <Button
+          title={"Nouveau compte"}
+          containerStyle={{
+            width: 200,
+            marginHorizontal: 50,
+            marginVertical: 10,
+          }}
+          type="clear"
+          titleStyle={{ color: "#e75e56" }}
+        />
+      </View>
     </Surface>
   );
 }

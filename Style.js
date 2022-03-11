@@ -2,16 +2,20 @@ import React from "react";
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-  container: {
-    backgroundColor: "rgb(245, 245, 245);",
-    // flex: "row",
-    //alignItems: "center",
-    justifyContent: "space-around",
-    // color: "yellow",
+  containerLogin: {
+    backgroundColor: "rgb(233, 233, 233)",
     flex: 1,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    // alignItems: "center",
+    justifyContent: "space-evenly",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  containerRegister: {
+    marginTop: 20,
+    backgroundColor: "rgb(255, 255, 255)",
+    // display: "flex",
+    justifyContent: "center",
+    // flexDirection: "column",
+    alignItems: "center",
   },
   containerButtonAction: {
     justifyContent: "space-between",
@@ -22,9 +26,17 @@ export default StyleSheet.create({
     // alignItems: "center",
   },
   text: {
-    color: "#fff",
-    margin: 25,
-    fontSize: 20,
+    color: "#e75e56",
+    fontSize: 22,
+    fontWeight: "bold",
+  },
+  textinput: {
+    margin: 12,
+    backgroundColor: "#fff",
+    width: 340,
+    height: 30,
+    //  borderRadius: 10,
+    padding: 10,
   },
   row1: {
     minWidth: "100%",
@@ -83,14 +95,6 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
-  textinput: {
-    margin: 12,
-    backgroundColor: "#fff",
-    width: 340,
-    height: 30,
-    //  borderRadius: 10,
-    padding: 10,
-  },
   button: {
     margin: 25,
     borderRadius: 100,
@@ -100,7 +104,7 @@ export default StyleSheet.create({
     margin: 25,
     borderRadius: 100,
     width: 250,
-    color: "#fff",
+    color: "#e75e56",
   },
   scrollView: {
     width: "100%",

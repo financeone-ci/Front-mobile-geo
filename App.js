@@ -1,5 +1,5 @@
 import * as React from "react";
-//import "react-native-gesture-handler";
+import { ThemeProvider } from "react-native-elements";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import Route from "./routes/Route";
@@ -20,10 +20,12 @@ const theme = {
 const queryClient = new QueryClient();
 export default function Main() {
   return (
-    <PaperProvider theme={theme}>
-      <QueryClientProvider client={queryClient}>
-        <Route />
-      </QueryClientProvider>
-    </PaperProvider>
+    <ThemeProvider>
+      <PaperProvider theme={theme}>
+        <QueryClientProvider client={queryClient}>
+          <Route />
+        </QueryClientProvider>
+      </PaperProvider>
+    </ThemeProvider>
   );
 }

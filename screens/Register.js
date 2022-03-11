@@ -12,14 +12,14 @@ export default function Login(props) {
 
   return (
     <ScrollView overScrollMode="never">
-      <Surface style={style.container}>
+      <Surface style={style.containerRegister}>
         <Avatar
           source={{
             uri: "http://assets.stickpng.com/thumbs/5a10a7f29642de34b6b65d03.png",
           }}
           size="xl"
         />
-        <Text style={style.text}>Création de compte</Text>
+        <Text style={style.text}>Nouveau compte</Text>
         <Formulaire
           elts={[
             {
@@ -46,18 +46,8 @@ export default function Login(props) {
               style: style.textinput,
               placeholder: "Mobile",
             },
-            /*{
-                  style: style.textinput,
-                  placeholder: "Photo",
-                  right: <TextInput.Icon name="image-plus" />,
-              },
-              {
-                  style: style.textinput,
-                  placeholder: "Couleur",
-              },*/
           ]}
         />
-
         <Button
           icon="login"
           mode="contained"
@@ -66,7 +56,6 @@ export default function Login(props) {
         >
           Valider
         </Button>
-
         <Button
           style={style.button}
           onPress={() => navigation.navigate("Login")}
