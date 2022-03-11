@@ -1,11 +1,11 @@
 import React from "react";
 import { View } from "react-native";
-import { Surface, Snackbar, TextInput, Text } from "react-native-paper";
-import { Input, Icon, Button } from "react-native-elements";
+import { Surface } from "react-native-paper";
+import { Input, Icon, Button, Text } from "react-native-elements";
+import TextInput from "../components/Formulaire";
 import { useNavigation } from "@react-navigation/native";
 import { Avatar } from "react-native-rapi-ui";
 import Style from "../Style";
-import Formulaire from "../components/Formulaire";
 import AppBarBottom from "../components/AppBarBottom";
 
 export default function Login(props) {
@@ -22,41 +22,51 @@ export default function Login(props) {
       />
 
       <Text style={style.text}>Connexion</Text>
-      <Input
+      <TextInput
         placeholder="Utilisateur"
-        leftIcon={{ type: "font-awesome", name: "chevron-left" }}
+        icon={{ type: "font-awesome", name: "user" }}
       />
-      <Input
+      <TextInput
         placeholder="Mot de passe"
-        leftIcon={{ type: "font-awesome", name: "chevron-left" }}
+        icon={{ type: "font-awesome", name: "lock" }}
+        type="text"
+        secureTextEntry={true}
       />
       <View
         style={{
           flexDirection: "row",
-          justifyContent: "space-around",
+          justifyContent: "space-between",
         }}
       >
         <Button
+          title={"Nouveau compte"}
+          containerStyle={{
+            width: 169,
+            margin: 10,
+          }}
+          type="clear"
+          titleStyle={{ color: "#e75e56", fontSize: 20 }}
+          onPress={() => navigation.navigate("Register")}
+        />
+        <Button
           title={"Connexion"}
+          icon={{
+            name: "arrow-right",
+            type: "font-awesome",
+            size: 20,
+            color: "white",
+            paddingLeft: 10,
+          }}
+          iconRight
           containerStyle={{
             width: 150,
-            marginHorizontal: 50,
-            marginVertical: 10,
+            margin: 10,
           }}
           buttonStyle={{
             backgroundColor: "#e75e56",
-            borderRadius: 3,
+            borderRadius: 10,
           }}
-        />
-        <Button
-          title={"Nouveau compte"}
-          containerStyle={{
-            width: 200,
-            marginHorizontal: 50,
-            marginVertical: 10,
-          }}
-          type="clear"
-          titleStyle={{ color: "#e75e56" }}
+          onPress={() => navigation.navigate("Accueil")}
         />
       </View>
     </Surface>

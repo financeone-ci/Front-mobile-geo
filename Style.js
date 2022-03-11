@@ -3,18 +3,17 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   containerLogin: {
-    backgroundColor: "rgb(233, 233, 233)",
+    backgroundColor: "rgb(255, 255, 255)",
     flex: 1,
-    justifyContent: "space-evenly",
+    justifyContent: "center",
     flexDirection: "column",
     alignItems: "center",
   },
   containerRegister: {
-    marginTop: 20,
     backgroundColor: "rgb(255, 255, 255)",
-    // display: "flex",
+    flex: 1,
     justifyContent: "center",
-    // flexDirection: "column",
+    flexDirection: "column",
     alignItems: "center",
   },
   containerButtonAction: {
@@ -26,6 +25,7 @@ export default StyleSheet.create({
     // alignItems: "center",
   },
   text: {
+    margin: 40,
     color: "#e75e56",
     fontSize: 22,
     fontWeight: "bold",
@@ -43,16 +43,12 @@ export default StyleSheet.create({
     maxWidth: "100%",
     flexGrow: 2,
     alignItems: "center",
-    // justifyContent: "center",
-    //backgroundColor: "green",
   },
   row2: {
     minWidth: "50%",
     maxWidth: "50%",
     flexGrow: 2,
     alignItems: "center",
-    // justifyContent: "center",
-    //backgroundColor: "green",
   },
   menuBloc: {
     marginTop: 20,

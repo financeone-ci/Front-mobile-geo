@@ -1,22 +1,20 @@
-import React from 'react';
-import { View, Text } from 'react-native';
-import { TextInput } from 'react-native-paper';
-import Style from '../Style';
+import React from "react";
+import { View, Text } from "react-native";
+import { Input } from "react-native-elements";
+import Style from "../Style";
 
-export default function Formulaire(props) {
+export default function TextInput(props) {
   return (
-    <View>
-      {
-          props.elts.map((elt, key)=>(
-            <TextInput 
-            key={key}
-            style={elt.style} 
-            placeholder={elt.placeholder}
-            secureTextEntry={ elt.secureTextEntry || false }
-            right={elt.right || '' }
-            />
-          ))
-      }
-     </View>
+    <>
+      <Input
+        placeholder={props.placeholder}
+        leftIcon={props.icon}
+        type={props.type || "text"}
+        secureTextEntry={props.secureTextEntry || false}
+        inputStyle={{
+          paddingLeft: 10,
+        }}
+      />
+    </>
   );
 }
