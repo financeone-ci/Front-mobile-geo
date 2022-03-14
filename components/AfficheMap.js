@@ -141,7 +141,14 @@ export default function AfficheMapp(props) {
             title={"lieu.nom_place"}
             description={"lieu.description_place"}
             pinColor="chocolate"
-          />
+          >
+            <Image
+              source={{
+                uri: "https://cdn-s-www.leprogres.fr/images/A90445F2-F0E7-4AA9-96E4-A4F57851E9F3/NW_raw/photo-mikhail-klimentyev-afp-1646580473.jpg",
+              }}
+              style={{ height: 35, width: 35 }}
+            />
+          </Marker>
         </MapView>
         <FloatButton />
       </View>
