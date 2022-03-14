@@ -30,7 +30,7 @@ export default function Accueil(props) {
   };
 
   return (
-    <Surface style={style.container}>
+    <Surface style={style.containerAccueil}>
       <Pressable onPress={() => onPressFunction("Carte")} style={style.row2}>
         <Card style={style.menuBloc}>
           <Card.Content style={style.menuLogo}>

@@ -9,6 +9,7 @@ import EventDetail from "../screens/EventDetail";
 import Events from "../screens/Events";
 import ListUsers from "../screens/ListUsers";
 import MenuMap from "../screens/MenuMap";
+import Profil from "../screens/Profil";
 
 const Stack = createNativeStackNavigator();
 // const Drawer = createDrawerNavigator();
@@ -16,24 +17,35 @@ const Stack = createNativeStackNavigator();
 export default function Route(props) {
   return (
     <NavigationContainer>
-      {/* <Drawer.Navigator initialRouteName="Login">
-        <Drawer.Screen name="Login" component={Login} />
-        <Drawer.Screen name="Register" component={Register} />
-      </Drawer.Navigator>
-*/}
       <Stack.Navigator
         screenOptions={{
           gestureEnabled: true,
+          headerTitleAlign: "center",
         }}
         initialRouteName="Login"
       >
-        <Stack.Screen name="Login">
+        <Stack.Screen
+          name="Login"
+          options={{
+            headerShown: false,
+          }}
+        >
           {(props) => <Login {...props} />}
         </Stack.Screen>
-        <Stack.Screen name="Accueil">
+        <Stack.Screen
+          name="Accueil"
+          options={{
+            headerLeft: () => null,
+          }}
+        >
           {(props) => <Accueil {...props} />}
         </Stack.Screen>
-        <Stack.Screen name="Register">
+        <Stack.Screen
+          name="Register"
+          options={{
+            headerShown: false,
+          }}
+        >
           {(props) => <Register {...props} />}
         </Stack.Screen>
         <Stack.Screen name="Events">
@@ -47,6 +59,9 @@ export default function Route(props) {
         </Stack.Screen>
         <Stack.Screen name="MenuMap">
           {(props) => <MenuMap {...props} />}
+        </Stack.Screen>
+        <Stack.Screen name="Profil">
+          {(props) => <Profil {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>

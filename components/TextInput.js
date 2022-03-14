@@ -11,9 +11,9 @@ export default function TextInput(props) {
         leftIcon={props.icon}
         type={props.type || "text"}
         secureTextEntry={props.secureTextEntry || false}
-        inputStyle={{
-          paddingLeft: 10,
-        }}
+        // inputStyle={{
+        //   color: "#e75e56",
+        // }}
       />
     </>
   );

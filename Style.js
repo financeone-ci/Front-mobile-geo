@@ -1,38 +1,63 @@
 import React from "react";
 import { StyleSheet } from "react-native";
+import colors from "./Couleur";
 
 export default StyleSheet.create({
   containerLogin: {
-    backgroundColor: "rgb(255, 255, 255)",
+    backgroundColor: colors.color4,
     flex: 1,
     justifyContent: "center",
     flexDirection: "column",
     alignItems: "center",
+  },
+  containerAccueil: {
+    backgroundColor: colors.color4,
+    flex: 1,
+    justifyContent: "center",
+    flexWrap: "wrap",
+    flexDirection: "row",
+    alignItems: "flex-start",
   },
   containerRegister: {
-    backgroundColor: "rgb(255, 255, 255)",
+    paddingTop: 40,
+    backgroundColor: colors.color4,
     flex: 1,
     justifyContent: "center",
     flexDirection: "column",
     alignItems: "center",
   },
+
   containerButtonAction: {
     justifyContent: "space-between",
-    // color: "yellow",
     flex: 1,
     flexDirection: "column",
-
-    // alignItems: "center",
   },
   text: {
     margin: 40,
-    color: "#e75e56",
+    color: colors.color1,
     fontSize: 22,
     fontWeight: "bold",
   },
+  textUser: {
+    marginTop: 10,
+    color: colors.color4,
+  },
+  textUserInfo: {
+    color: colors.color4,
+  },
+  textInfoTitle: {
+    color: colors.color1,
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  textInfo: {
+    color: colors.color2,
+    fontSize: 17,
+    marginBottom: 10,
+  },
   textinput: {
     margin: 12,
-    backgroundColor: "#fff",
+    backgroundColor: colors.color4,
     width: 340,
     height: 30,
     //  borderRadius: 10,
@@ -47,7 +72,7 @@ export default StyleSheet.create({
   row2: {
     minWidth: "50%",
     maxWidth: "50%",
-    flexGrow: 2,
+    flexGrow: 1,
     alignItems: "center",
   },
   menuBloc: {
@@ -100,7 +125,7 @@ export default StyleSheet.create({
     margin: 25,
     borderRadius: 100,
     width: 250,
-    color: "#e75e56",
+    color: colors.color1,
   },
   scrollView: {
     width: "100%",
