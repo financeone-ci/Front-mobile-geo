@@ -14,7 +14,7 @@ import MapView, { Marker } from "react-native-maps";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import axios from "axios";
 import { Avatar } from "react-native-paper";
-import FloatButton from "./FloatButton";
+import FloatButton from "../components/FloatButton";
 
 export default function AfficheMapp(props) {
   const [location, setLocation] = React.useState(null);
@@ -82,7 +82,7 @@ export default function AfficheMapp(props) {
   } else {
     const detail = location.coords;
     return (
-      <View style={style.container}>
+      <View style={style.containerLogin}>
         <MapView
           style={StyleSheet.absoluteFill}
           initialRegion={{
@@ -125,7 +125,14 @@ export default function AfficheMapp(props) {
                 title={lieu.nom_place}
                 description={lieu.description_place}
                 pinColor={lieu.color_place}
-              />
+              >
+                <Image
+                  source={{
+                    uri: "https://cdn-s-www.leprogres.fr/images/A90445F2-F0E7-4AA9-96E4-A4F57851E9F3/NW_raw/photo-mikhail-klimentyev-afp-1646580473.jpg",
+                  }}
+                  style={{ height: 35, width: 35 }}
+                />
+              </Marker>
             ))}
           <Marker
             onPress={() =>
