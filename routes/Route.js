@@ -4,12 +4,15 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 //import { createDrawerNavigator } from "@react-navigation/drawer";
 import Login from "../screens/Login";
 import Register from "../screens/Register";
-import Accueil from "../screens/Accueil";
+// import Accueil from "../screens/Accueil";
+import MenuBas from "../components/MenuBas";
 import EventDetail from "../screens/EventDetail";
 import Events from "../screens/Events";
 import ListUsers from "../screens/ListUsers";
 import MenuMap from "../screens/MenuMap";
 import Profil from "../screens/Profil";
+import LoadingPage from "../screens/LoadingPage";
+import ListTeam from "../screens/ListTeam";
 
 const Stack = createNativeStackNavigator();
 // const Drawer = createDrawerNavigator();
@@ -23,7 +26,16 @@ export default function Route(props) {
           headerTitleAlign: "center",
         }}
         initialRouteName="Login"
+        // initialRouteName="LoadingPage"
       >
+        <Stack.Screen
+          name="LoadingPage"
+          options={{
+            headerShown: false,
+          }}
+        >
+          {(props) => <LoadingPage {...props} />}
+        </Stack.Screen>
         <Stack.Screen
           name="Login"
           options={{
@@ -38,7 +50,7 @@ export default function Route(props) {
             headerLeft: () => null,
           }}
         >
-          {(props) => <Accueil {...props} />}
+          {(props) => <MenuBas {...props} />}
         </Stack.Screen>
         <Stack.Screen
           name="Register"
@@ -54,7 +66,20 @@ export default function Route(props) {
         <Stack.Screen name="EventDetail">
           {(props) => <EventDetail {...props} />}
         </Stack.Screen>
-        <Stack.Screen name="ListUsers">
+        <Stack.Screen
+          name="ListTeam"
+          options={{
+            title: "Mon équipe",
+          }}
+        >
+          {(props) => <ListTeam {...props} />}
+        </Stack.Screen>
+        <Stack.Screen
+          name="ListUsers"
+          options={{
+            title: "Commerciaux",
+          }}
+        >
           {(props) => <ListUsers {...props} />}
         </Stack.Screen>
         <Stack.Screen name="MenuMap">

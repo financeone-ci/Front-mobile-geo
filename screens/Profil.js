@@ -1,19 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import Style from "../Style";
 import colors from "../Couleur";
 import { Text, Avatar, Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
+import BarStatus from "../components/BarStatus";
 
 function Profil(props) {
   const navigation = useNavigation();
   const style = Style;
+
   return (
     <>
       <View style={styleProfil.containerProfil}>
         <View style={styleProfil.headerProfil}>
-          <Avatar size={100} rounded source={require("../assets/profil.jpg")} />
-
+          <Avatar
+            size={100}
+            rounded
+            source={require("../assets/image/profil.jpg")}
+          />
           <Text h4 style={style.textUser}>
             Nom & Prénoms
           </Text>
@@ -28,7 +33,7 @@ function Profil(props) {
               activeOpacity={0.6}
               onPress={() => navigation.navigate("Register")}
             >
-              <Icon reverse name="edit" type="material" color="#e75e56" />
+              <Icon reverse name="edit" type="material" color={colors.color1} />
             </TouchableOpacity>
           </View>
         </View>

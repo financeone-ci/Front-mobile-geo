@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList, StatusBar } from "react-native";
+import { StyleSheet, Text, View, FlatList, Alert } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useMutation, useQuery, useQueryClient } from "react-query";
@@ -7,13 +7,22 @@ import Style from "../Style";
 import Liste from "../components/Liste";
 import RechercheBar from "../components/RechercheBar";
 import Loader from "../components/Loader";
+import FloatButton from "../components/FloatButton";
 import BarStatus from "../components/BarStatus";
 import Toast from "react-native-toast-message";
 
-const ListUser = (props) => {
+const ListTeam = (props) => {
   const navigation = useNavigation();
 
   const [listUser, setListUser] = useState("");
+
+  // Navigation vers la liste des users
+  const handlePress = () => {
+    navigation.navigate("ListUsers", {
+      id: id,
+      jeton: jeton,
+    });
+  };
 
   // Chargement des données
   const jeton = props.route.params.jeton;
@@ -23,13 +32,14 @@ const ListUser = (props) => {
     const headers = {
       authorization: jeton,
     };
-    let response = await axios(`Team/UserList.php?type=user&login=${id}`, {
+    let response = await axios(`Team/UserList.php?type=team&login=${id}`, {
       headers,
     });
+    // console.log(response.data);
     return response.data;
   };
 
-  const VueData = useQuery(["listuser"], fetchData, {
+  const VueData = useQuery(["listeam"], fetchData, {
     onSuccess: (data) => {
       data.reponse == "success" && setListUser(data.data);
       data.reponse == "error" &&
@@ -63,19 +73,22 @@ const ListUser = (props) => {
   return (
     <View style={style.container}>
       <BarStatus />
-      <RechercheBar />
       {VueData.isLoading ? (
         <Loader />
       ) : (
-        <FlatList
-          data={VueData.isSuccess && listUser}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-        />
+        <View>
+          <RechercheBar />
+          <FlatList
+            data={VueData.isSuccess && listUser}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id}
+          />
+        </View>
       )}
+      <FloatButton onPress={handlePress} />
       <Toast />
     </View>
   );
 };
 
-export default ListUser;
+export default ListTeam;

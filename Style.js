@@ -3,12 +3,17 @@ import { StyleSheet } from "react-native";
 import colors from "./Couleur";
 
 export default StyleSheet.create({
-  containerLogin: {
+  container: {
     backgroundColor: colors.color4,
     flex: 1,
+  },
+  containerLogin: {
+    backgroundColor: colors.color4,
     justifyContent: "center",
     flexDirection: "column",
     alignItems: "center",
+    minHeight: "100%",
+    minWidth: "100%",
   },
   containerAccueil: {
     backgroundColor: colors.color4,
@@ -19,9 +24,11 @@ export default StyleSheet.create({
     alignItems: "flex-start",
   },
   containerRegister: {
+    minHeight: "100%",
+    minWidth: "100%",
     paddingTop: 40,
     backgroundColor: colors.color4,
-    flex: 1,
+    // flex: 1,
     justifyContent: "center",
     flexDirection: "column",
     alignItems: "center",
@@ -33,9 +40,9 @@ export default StyleSheet.create({
     flexDirection: "column",
   },
   text: {
-    margin: 40,
-    color: colors.color1,
-    fontSize: 22,
+    margin: 25,
+    color: colors.color2,
+    fontSize: 25,
     fontWeight: "bold",
   },
   textUser: {
@@ -76,7 +83,7 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   menuBloc: {
-    marginTop: 20,
+    marginTop: 15,
     width: "90%",
     padding: 10,
     height: 150,
@@ -90,7 +97,7 @@ export default StyleSheet.create({
     },
     shadowOpacity: 0.51,
     shadowRadius: 25,
-    elevation: 20,
+    elevation: 3,
   },
   menuBlocList: {
     marginTop: 10,

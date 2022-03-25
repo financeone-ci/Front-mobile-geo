@@ -12,7 +12,7 @@ function ButtonValide(props) {
             margin: 10,
           }
         }
-        titleStyle={props.titleStyle || { color: "#fff", fontSize: 20 }}
+        titleStyle={props.titleStyle || { color: "#fff", fontSize: 17 }}
         {...props}
       />
     </>

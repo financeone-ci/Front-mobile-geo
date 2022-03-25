@@ -9,7 +9,6 @@ const style = Style;
 //const detail =  route.params
 const MappRoute = () => <AfficheMapp />;
 const Equipe = () => <AfficheMapp />;
-
 const AlbumsRoute = () => <Events />;
 
 const MenuMapp = (props) => {

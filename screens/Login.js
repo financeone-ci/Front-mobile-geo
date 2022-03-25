@@ -1,65 +1,195 @@
-import React from "react";
-import { View } from "react-native";
-import { Surface } from "react-native-paper";
-import { Text } from "react-native-elements";
+import React, { useEffect, useState } from "react";
+import { Alert, View, SafeAreaView, StatusBar } from "react-native";
+import { Text, Avatar } from "react-native-elements";
 import ButtonValide from "../components/ButtonValide";
 import TextInput from "../components/TextInput";
-import { useNavigation } from "@react-navigation/native";
-import { Avatar } from "react-native-rapi-ui";
+import { useNavigation, route, navigation } from "@react-navigation/native";
+import colors from "../Couleur";
 import Style from "../Style";
+import * as Location from "expo-location";
+import { Formik, Field } from "formik";
+import * as yup from "yup";
+import { useMutation } from "react-query";
+import Loader from "../components/Loader";
+import Toast from "react-native-toast-message";
+import axios from "../constantes/axios";
+import storeDataObj from "../functions/asyncSetItem";
+import BarStatus from "../components/BarStatus";
 
 export default function Login(props) {
   const navigation = useNavigation();
-  const style = Style;
+  const styles = Style;
+
+  const [initialValues, setInitialValues] = useState({
+    user: "",
+    password: "",
+  });
+
+  // Schema de validation du formulaire
+  const schema = yup.object().shape({
+    user: yup.string().required("Utilisateur obligatoire"),
+    password: yup.string().required("Password obligatoire"),
+  });
+
+  // Vérifier l'activation du GPS
+  useEffect(() => {
+    // const [location, setLocation] = useState(null);
+    const getCoordonnees = async () => {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        return;
+      }
+    };
+    getCoordonnees();
+  }, []);
+
+  // Enregistrement dans l'apistorage
+  // const clearItem = async (value) => {
+  //   try {
+  //     await AsyncStorage.clear();
+  //   } catch (e) {
+  //     // saving error
+  //     Alert("Impossible d'enregistrer les donnees :".e);
+  //   }
+  // };
+
+  // Recherche de l'utilisateur
+  const fetchLogin = async (values) => {
+    let response = "";
+    response = await axios.post("user/UserLogin.php", { values });
+    return response.data;
+  };
+
+  const login = useMutation(fetchLogin, {
+    onSuccess: (data) => {
+      if (data.reponse === "success") {
+        // Enregistrer des données dans asyncstorage
+        storeDataObj(data.donnee, data.jeton).then(() => {
+          // Redirection vers accueil
+          navigation.replace("Accueil");
+        });
+      }
+      data.reponse === "error" &&
+        Toast.show({
+          type: data.reponse,
+          text1: data.titre,
+          text2: data.message,
+          visibilityTime: 4000,
+        });
+    },
+    onError: () => {
+      Toast.show({
+        type: "error",
+        text1: "Connexion",
+        text2: "Erreur de connexion",
+        visibilityTime: 4000,
+      });
+    },
+  });
 
   return (
-    <Surface style={style.containerLogin}>
-      <Avatar
-        source={{
-          uri: "http://assets.stickpng.com/thumbs/5a10a7f29642de34b6b65d03.png",
-        }}
-        size="xl"
-      />
-
-      <Text style={style.text}>Connexion</Text>
-      <TextInput
-        placeholder="Utilisateur"
-        icon={{ type: "material", name: "person", color: "#bebdbf" }}
-      />
-      <TextInput
-        placeholder="Mot de passe"
-        icon={{ type: "material", name: "lock", color: "#bebdbf" }}
-        secureTextEntry={true}
-      />
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-        }}
-      >
-        <ButtonValide
-          title={"Nouveau compte"}
-          type="clear"
-          titleStyle={{ color: "#e75e56", fontSize: 20 }}
-          onPress={() => navigation.navigate("Register")}
-        />
-        <ButtonValide
-          title={"Connexion"}
-          icon={{
-            name: "arrow-right",
-            type: "font-awesome",
-            size: 20,
-            color: "white",
-            paddingLeft: 10,
+    <View>
+      <BarStatus />
+      {login.isLoading || login.isSuccess ? (
+        <Loader />
+      ) : (
+        <Formik
+          validationSchema={schema}
+          initialValues={initialValues}
+          onSubmit={(values, onSubmitProps) => {
+            login.mutate(values, {
+              onSuccess: (data) => {
+                data.reponse == "success" && onSubmitProps.resetForm();
+              },
+            });
           }}
-          buttonStyle={{
-            backgroundColor: "#e75e56",
-            borderRadius: 5,
-          }}
-          iconRight
-          onPress={() => navigation.navigate("Accueil")}
-        />
-      </View>
-    </Surface>
+        >
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            values,
+            errors,
+            isValid,
+            touched,
+          }) => (
+            <>
+              {/* <StatusBar barStyle="" /> */}
+              <SafeAreaView>
+                <View style={styles.containerLogin}>
+                  <Avatar
+                    size={150}
+                    rounded
+                    source={require("../assets/image/logo.png")}
+                  />
+                  <Text style={styles.text}>Connexion</Text>
+                  <TextInput
+                    placeholder="Utilisateur"
+                    name="user"
+                    label="Utilisateur"
+                    icon={{
+                      type: "material",
+                      name: "person",
+                      color: colors.color1,
+                      size: 30,
+                    }}
+                    error={(touched.user && errors.user) || ""}
+                    value={values.user}
+                    onChangeText={handleChange("user")}
+                    onBlur={handleBlur("user")}
+                  />
+                  <TextInput
+                    placeholder="Password"
+                    name="password"
+                    label="Password"
+                    icon={{
+                      type: "material",
+                      name: "lock",
+                      color: colors.color1,
+                      size: 30,
+                    }}
+                    secureTextEntry={true}
+                    error={(touched.password && errors.password) || ""}
+                    value={values.password}
+                    onChangeText={handleChange("password")}
+                    onBlur={handleBlur("password")}
+                  />
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <ButtonValide
+                      title={"Nouveau compte"}
+                      type="clear"
+                      titleStyle={{ color: colors.color1, fontSize: 17 }}
+                      onPress={() => navigation.navigate("Register")}
+                    />
+                    <ButtonValide
+                      title={"Connexion"}
+                      icon={{
+                        name: "arrow-right",
+                        type: "font-awesome",
+                        size: 20,
+                        color: "white",
+                        paddingLeft: 10,
+                      }}
+                      buttonStyle={{
+                        backgroundColor: colors.color1,
+                        borderRadius: 5,
+                      }}
+                      iconRight
+                      onPress={handleSubmit}
+                    />
+                  </View>
+                </View>
+              </SafeAreaView>
+            </>
+          )}
+        </Formik>
+      )}
+      <Toast />
+    </View>
   );
 }
