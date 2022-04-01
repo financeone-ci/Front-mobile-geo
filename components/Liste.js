@@ -21,30 +21,14 @@ const Liste = (props) => {
           <ListItem.Subtitle>{props.soustitre}</ListItem.Subtitle>
         </ListItem.Content>
         <View style={{ flexDirection: "column", alignItems: "center" }}>
-          <TouchableOpacity
-            activeOpacity={0.6}
-            onPress={() => navigation.navigate("Register")}
-          >
+          <TouchableOpacity activeOpacity={0.6} onPress={props.onPress}>
             <Icon
-              reverse
-              name="info"
               type="material"
+              name={props.iconName}
               color={colors.color1}
-              size={11}
+              size={25}
             />
           </TouchableOpacity>
-          {/* <TouchableOpacity
-            activeOpacity={0.6}
-            onPress={() => navigation.navigate("Register")}
-          >
-            <Icon
-              reverse
-              name="info"
-              type="material"
-              color={colors.color2}
-              size={10}
-            />
-          </TouchableOpacity> */}
         </View>
       </ListItem>
     </>

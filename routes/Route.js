@@ -9,7 +9,7 @@ import MenuBas from "../components/MenuBas";
 import EventDetail from "../screens/EventDetail";
 import Events from "../screens/Events";
 import ListUsers from "../screens/ListUsers";
-import MenuMap from "../screens/MenuMap";
+import Param from "../screens/Param";
 import Profil from "../screens/Profil";
 import LoadingPage from "../screens/LoadingPage";
 import ListTeam from "../screens/ListTeam";
@@ -25,8 +25,7 @@ export default function Route(props) {
           gestureEnabled: true,
           headerTitleAlign: "center",
         }}
-        initialRouteName="Login"
-        // initialRouteName="LoadingPage"
+        initialRouteName="LoadingPage"
       >
         <Stack.Screen
           name="LoadingPage"
@@ -51,6 +50,15 @@ export default function Route(props) {
           }}
         >
           {(props) => <MenuBas {...props} />}
+        </Stack.Screen>
+        <Stack.Screen
+          name="Param"
+          title="Paramètres"
+          options={{
+            headerLeft: () => null,
+          }}
+        >
+          {(props) => <Param {...props} />}
         </Stack.Screen>
         <Stack.Screen
           name="Register"
@@ -81,9 +89,6 @@ export default function Route(props) {
           }}
         >
           {(props) => <ListUsers {...props} />}
-        </Stack.Screen>
-        <Stack.Screen name="MenuMap">
-          {(props) => <MenuMap {...props} />}
         </Stack.Screen>
         <Stack.Screen name="Profil">
           {(props) => <Profil {...props} />}

@@ -44,25 +44,12 @@ export default function Login(props) {
       .required("Confirmation obligatoire"),
   });
 
+  // Enregistrer utilisateur
   const submitUser = async (values) => {
     let response = "";
-    // const headers = {
-    //   Authorization: cookieInfo,
-    // };
-
-    response = await axios.post(
-      "user/UserRegister.php",
-      { values }
-      // { headers }
-    );
-    // else {
-    //   // Modification societe
-    //   response = await axios.post(
-    //     `comptes/UpdateCompte.php?id=${values.id}`,
-    //     { values },
-    //     { headers }
-    //   );
-    // }
+    response = await axios.post("user/UserRegister.php?type=Manager", {
+      values,
+    });
     return response.data;
   };
 

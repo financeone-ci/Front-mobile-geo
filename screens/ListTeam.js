@@ -35,7 +35,6 @@ const ListTeam = (props) => {
     let response = await axios(`Team/UserList.php?type=team&login=${id}`, {
       headers,
     });
-    // console.log(response.data);
     return response.data;
   };
 
@@ -58,12 +57,13 @@ const ListTeam = (props) => {
         visibilityTime: 4000,
       });
     },
-    cacheTime: 1 * 60 * 1000,
+    cacheTime: 1 * 10 * 1000,
   });
 
   const style = Style;
   const renderItem = ({ item }) => (
     <Liste
+      iconName="info"
       key={item.id}
       titre={item.user_nom_complet}
       soustitre={item.user_poste}

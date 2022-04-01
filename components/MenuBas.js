@@ -4,12 +4,9 @@ import Accueil from "../screens/Accueil";
 import Profil from "../screens/Profil";
 import Param from "../screens/Param";
 import colors from "../Couleur";
+import * as Location from "expo-location";
 
-const accueil = () => <Accueil />;
-const profil = () => <Profil />;
-const param = () => <Param />;
-
-const MenuBas = ({ navigation }) => {
+const MenuBas = (props) => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     { key: "Accueil", title: "Accueil", icon: "home" },
@@ -17,9 +14,40 @@ const MenuBas = ({ navigation }) => {
     { key: "Param", title: "Paramètres", icon: "cog" },
   ]);
 
+  // Vérifier l'activation du GPS
   useEffect(() => {
-    navigation.setOptions({ title: routes[index].title });
+    // const [location, setLocation] = useState(null);
+    const getCoordonnees = async () => {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        return;
+      }
+    };
+    getCoordonnees();
+  }, []);
+
+  useEffect(() => {
+    props.navigation.setOptions({ title: routes[index].title });
   }, [index]);
+
+  const accueil = () => (
+    <Accueil
+      userId={props.route.params.userId}
+      jeton={props.route.params.jeton}
+    />
+  );
+  const profil = () => (
+    <Profil
+      userId={props.route.params.userId}
+      jeton={props.route.params.jeton}
+    />
+  );
+  const param = () => (
+    <Param
+      userId={props.route.params.userId}
+      jeton={props.route.params.jeton}
+    />
+  );
 
   const renderScene = BottomNavigation.SceneMap({
     Accueil: accueil,

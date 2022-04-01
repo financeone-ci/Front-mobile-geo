@@ -1,13 +1,14 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert } from "react-native";
-// Enregistrement d'objet dans l'apistorage*************************
-const asyncSetItem = async (data) => {
+
+const asyncSetItemObj = async (key) => {
   try {
-    await AsyncStorage.multiSet(data);
+    const dataValue = JSON.stringify(key);
+    await AsyncStorage.setItem("@storage_data", dataValue);
   } catch (e) {
     // saving error
     Alert("ERREUR : ".e);
   }
 };
 
-export default asyncSetItem;
+export default asyncSetItemObj;

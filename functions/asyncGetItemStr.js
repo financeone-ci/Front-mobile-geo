@@ -1,9 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const asyncGetItemStr = async (key) => {
+const asyncGetItemStr = async (keys) => {
   // get Data from Storage
   try {
-    const data = await AsyncStorage.getItem(key);
+    const data = await AsyncStorage.multiGet(keys);
     if (data !== null) {
       return data;
     }

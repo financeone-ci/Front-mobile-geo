@@ -6,15 +6,15 @@ import TextInput from "../components/TextInput";
 import { useNavigation, route, navigation } from "@react-navigation/native";
 import colors from "../Couleur";
 import Style from "../Style";
-import * as Location from "expo-location";
 import { Formik, Field } from "formik";
 import * as yup from "yup";
 import { useMutation } from "react-query";
 import Loader from "../components/Loader";
 import Toast from "react-native-toast-message";
 import axios from "../constantes/axios";
-import storeDataObj from "../functions/asyncSetItem";
+import asyncSetItem from "../functions/asyncSetItem";
 import BarStatus from "../components/BarStatus";
+import asyncClear from "../functions/asyncClear";
 
 export default function Login(props) {
   const navigation = useNavigation();
@@ -31,28 +31,6 @@ export default function Login(props) {
     password: yup.string().required("Password obligatoire"),
   });
 
-  // Vérifier l'activation du GPS
-  useEffect(() => {
-    // const [location, setLocation] = useState(null);
-    const getCoordonnees = async () => {
-      const { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        return;
-      }
-    };
-    getCoordonnees();
-  }, []);
-
-  // Enregistrement dans l'apistorage
-  // const clearItem = async (value) => {
-  //   try {
-  //     await AsyncStorage.clear();
-  //   } catch (e) {
-  //     // saving error
-  //     Alert("Impossible d'enregistrer les donnees :".e);
-  //   }
-  // };
-
   // Recherche de l'utilisateur
   const fetchLogin = async (values) => {
     let response = "";
@@ -64,9 +42,18 @@ export default function Login(props) {
     onSuccess: (data) => {
       if (data.reponse === "success") {
         // Enregistrer des données dans asyncstorage
-        storeDataObj(data.donnee, data.jeton).then(() => {
-          // Redirection vers accueil
-          navigation.replace("Accueil");
+        const info = [
+          ["@storage_token", data.jeton],
+          ["@storage_id", data.donnee.user],
+        ];
+        asyncClear().then(() => {
+          asyncSetItem(info).then(() => {
+            // Redirection vers accueil
+            navigation.replace("Accueil", {
+              userId: data.donnee.user,
+              jeton: data.jeton,
+            });
+          });
         });
       }
       data.reponse === "error" &&
